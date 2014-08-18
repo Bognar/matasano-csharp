@@ -19,7 +19,14 @@ namespace Matasano.Set1
 
         public static byte[] DecryptAES128ECB(byte[] data, byte[] key)
         {
-            var aes = new AesManaged
+            var aes = GetAesManaged(key);
+            var decryptor = aes.CreateDecryptor();
+            return decryptor.TransformFinalBlock(data, 0, data.Length);
+        }
+
+        private static AesManaged GetAesManaged(byte[] key)
+        {
+            return new AesManaged
             {
                 KeySize = 128,
                 Key = key,
@@ -28,8 +35,13 @@ namespace Matasano.Set1
                 Padding = PaddingMode.None,
                 IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
             };
-            var decryptor = aes.CreateDecryptor();
-            return decryptor.TransformFinalBlock(data, 0, data.Length);
+        }
+
+        public static byte[] EncryptAES128ECB(byte[] data, byte[] key)
+        {
+            var aes = GetAesManaged(key);
+            var encryptor = aes.CreateEncryptor();
+            return encryptor.TransformFinalBlock(data, 0, data.Length);
         }
     }
 }
