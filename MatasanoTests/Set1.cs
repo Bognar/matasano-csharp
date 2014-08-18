@@ -71,5 +71,14 @@ namespace MatasanoTests
             var firstLine = decrypted.Split('\n')[0];
             Assert.AreEqual("I'm back and I'm ringin' the bell ", firstLine);
         }
+
+        [TestMethod]
+        public void Challenge8()
+        {
+            var c8Data = Set1Data.Challenge8.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var aesData = Matasano.Set1.Challenge8.DetectAESECB(c8Data);
+            // No need to assert, if we got this far we found duplicated data
+            Console.WriteLine(aesData);
+        }
     }
 }
