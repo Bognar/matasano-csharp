@@ -62,5 +62,14 @@ namespace MatasanoTests
             var firstLine = decrypted.Split('\n')[0];
             Assert.AreEqual("I'm back and I'm ringin' the bell ", firstLine);
         }
+
+        [TestMethod]
+        public void Challenge7()
+        {
+            var c7Data = Set1Data.Challenge7.Replace(Environment.NewLine, "");
+            var decrypted = Matasano.Set1.Challenge7.DecryptAES128ECB(c7Data, "YELLOW SUBMARINE");
+            var firstLine = decrypted.Split('\n')[0];
+            Assert.AreEqual("I'm back and I'm ringin' the bell ", firstLine);
+        }
     }
 }
